@@ -1,7 +1,7 @@
 addListeners();
 
 
-function animaster(){
+function animaster() {
     return {
         /**
          * Блок плавно появляется из прозрачного.
@@ -9,13 +9,13 @@ function animaster(){
          * @param duration — Продолжительность анимации в миллисекундах
          */
         fadeIn(element, duration) {
-            element.style.transitionDuration =  `${duration}ms`;
+            element.style.transitionDuration = `${duration}ms`;
             element.classList.remove('hide');
             element.classList.add('show');
         },
 
         fadeOut(element, duration) {
-            element.style.transitionDuration =  `${duration}ms`;
+            element.style.transitionDuration = `${duration}ms`;
             element.classList.remove('show');
             element.classList.add('hide');
         },
@@ -39,7 +39,7 @@ function animaster(){
          * @param ratio — во сколько раз увеличить/уменьшить. Чтобы уменьшить, нужно передать значение меньше 1
          */
         scale(element, duration, ratio) {
-            element.style.transitionDuration =  `${duration}ms`;
+            element.style.transitionDuration = `${duration}ms`;
             element.style.transform = getTransform(null, ratio);
         },
 
@@ -71,6 +71,7 @@ function animaster(){
         }
     }
 }
+
 function addListeners() {
     document.getElementById('fadeInPlay')
         .addEventListener('click', function () {
@@ -105,13 +106,21 @@ function addListeners() {
     document.getElementById('showAndHide')
         .addEventListener('click', function () {
             const block = document.getElementById('showAndHideBlock');
-            animaster().showAndHide(block,5000);
+            animaster().showAndHide(block, 5000);
         });
 
+    let heartAnimation;
     document.getElementById('heartBeating')
         .addEventListener('click', function () {
             const block = document.getElementById('heartBeatingBlock');
-            animaster().heartBeating(block,1000);
+            heartAnimation = animaster().heartBeating(block, 1000);
+        });
+    document.getElementById('heartBeatingStop')
+        .addEventListener('click', function () {
+            if (heartAnimation) {
+                heartAnimation.stop();
+                heartAnimation = null;
+            }
         });
 }
 
