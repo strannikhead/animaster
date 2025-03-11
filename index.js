@@ -1,5 +1,9 @@
 addListeners();
 
+
+function animaster(){
+
+}
 function addListeners() {
     document.getElementById('fadeInPlay')
         .addEventListener('click', function () {
