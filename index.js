@@ -43,13 +43,21 @@ function animaster(){
             element.style.transform = getTransform(null, ratio);
         },
 
-        moveAndHide(element, duration, translation) {
-            element.style.transitionDuration = `${duration}ms`;
-            element.style.transform = getTransform(translation, null);
-            element.style.transitionDuration =  `${duration}ms`;
-            element.classList.remove('show');
-            element.classList.add('hide');
+        moveAndHide(element, duration) {
+            this.move(element, duration * 0.6);
+            setTimeout(() => this.fadeOut(element, duration * 0.4), duration * 0.6);
+
         },
+
+        showAndHide(element, duration) {
+            this.fadeIn(element, duration / 3);
+            setTimeout(() => this.fadeOut(element, duration / 3), duration / 3)
+        },
+
+        heartBeating(element, duration) {
+            this.scale(element, duration / 2, 1.4);
+            setTimeout(() => this.scale(element, duration / 2, 1), 500)
+        }
 }
 }
 function addListeners() {
@@ -80,7 +88,19 @@ function addListeners() {
     document.getElementById('moveAndHide')
         .addEventListener('click', function () {
             const block = document.getElementById('moveAndHideBlock');
-            animaster().moveAndHide(block, 5000, {x: 100, y: 10});
+            animaster().moveAndHide(block, 5000);
+        });
+
+    document.getElementById('showAndHide')
+        .addEventListener('click', function () {
+            const block = document.getElementById('showAndHideBlock');
+            animaster().showAndHide(block,5000);
+        });
+
+    document.getElementById('heartBeating')
+        .addEventListener('click', function () {
+            const block = document.getElementById('heartBeatingBlock');
+            animaster().heartBeating(block,1000);
         });
 }
 
